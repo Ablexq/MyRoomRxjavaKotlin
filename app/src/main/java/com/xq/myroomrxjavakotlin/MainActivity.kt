@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private var mUserDao: UserDao? = null
     private var mBuffer: StringBuffer? = null
-    private val TAG = "thedata"
+    private val TAG = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
