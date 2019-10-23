@@ -10,47 +10,47 @@ interface UserDao {
     //所有的CURD根据primary key进行匹配
     //------------------------query------------------------
     @Query("SELECT * FROM user")
-    fun getAll(): Single<List<User>>
+    fun getAll(): Single<List<UserEntity>>
 
     @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray?): Single<List<User>>
+    fun loadAllByIds(userIds: IntArray?): Single<List<UserEntity>>
 
     @Query(
         "SELECT * FROM user WHERE first_name LIKE :first AND "
                 + "last_name LIKE :last LIMIT 1"
     )
-    fun findByName(first: String?, last: String?): Single<User>
+    fun findByName(first: String?, last: String?): Single<UserEntity>
 
     @Query("SELECT * FROM user WHERE uid = :uid")
-    fun findByUid(uid: Int): Single<User>
+    fun findByUid(uid: Int): Single<UserEntity>
 
     //-----------------------insert----------------------
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: User?): Single<Long>
+    fun insert(user: UserEntity?): Single<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg users: User?): Completable
+    fun insertAll(vararg users: UserEntity?): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(users: List<User?>?): Single<List<Long>>
+    fun insertAll(users: List<UserEntity?>?): Single<List<Long>>
 
     //---------------------update------------------------
     @Update
-    fun update(user: User?): Single<Int>
+    fun update(user: UserEntity?): Single<Int>
 
     @Update
-    fun updateAll(vararg user: User?): Completable
+    fun updateAll(vararg user: UserEntity?): Completable
 
     @Update
-    fun updateAll(user: List<User?>?): Completable
+    fun updateAll(user: List<UserEntity?>?): Completable
 
     //-------------------delete-------------------
     @Delete
-    fun delete(user: User?): Single<Int>
+    fun delete(user: UserEntity?): Single<Int>
 
     @Delete
-    fun deleteAll(users: List<User?>?): Single<Int>
+    fun deleteAll(users: List<UserEntity?>?): Single<Int>
 
     @Delete
-    fun deleteAll(vararg users: User?): Single<Int>
+    fun deleteAll(vararg users: UserEntity?): Single<Int>
 }

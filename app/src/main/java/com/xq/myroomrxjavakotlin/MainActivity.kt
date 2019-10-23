@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.xq.myroomrxjavakotlin.db.AppDatabase
-import com.xq.myroomrxjavakotlin.db.User
+import com.xq.myroomrxjavakotlin.db.UserEntity
 import com.xq.myroomrxjavakotlin.db.UserDao
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         Thread(Runnable {
             val random = Random().nextInt(9) + 1
             val update: Int = mUserDao!!.update(
-                User(
+                UserEntity(
                     random,
                     "t" + System.currentTimeMillis() / 1000,
                     "kobe"
@@ -80,16 +80,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun insertSome() {
         Thread(Runnable {
-            val users: ArrayList<User?> = ArrayList()
+            val users: ArrayList<UserEntity?> = ArrayList()
             users.add(
-                User(
+                UserEntity(
                     "t" + System.currentTimeMillis() / 1000,
                     "jordan",
                     20
                 )
             )
             users.add(
-                User(
+                UserEntity(
                     "t" + System.currentTimeMillis() / 1000,
                     "james",
                     21
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             //返回的是插入元素的primary key index
 
             val aLong: Long = mUserDao!!.insert(
-                User(
+                UserEntity(
                     "t" + System.currentTimeMillis() / 1000,
                     "allen",
                     18
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() {
     private fun deleteOne() {
         Thread(Runnable {
             val random = Random().nextInt(9) + 1
-            val delete: Int = mUserDao!!.delete(User(random)).blockingGet()
+            val delete: Int = mUserDao!!.delete(UserEntity(random)).blockingGet()
             if (delete > 0) {
                 //size 表示删除个数
 
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
     private fun findOne() {
         Thread(Runnable {
             val random = Random().nextInt(9) + 1
-            val user: User = mUserDao!!.findByUid(random).blockingGet()
+            val user: UserEntity = mUserDao!!.findByUid(random).blockingGet()
             val msg =
                 "find one success , index is $random  user:  $user"
             mBuffer!!.append(msg + "\n")
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun findAll() {
         Thread(Runnable {
-            val all: List<User> = mUserDao!!.getAll().blockingGet()
+            val all: List<UserEntity> = mUserDao!!.getAll().blockingGet()
             if (all.isNotEmpty()) {
                 for (user1 in all) {
                     val msg = "find all success ,item  : $user1"
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun deleteAll() {
         Thread(Runnable {
-            val all: List<User?> = mUserDao!!.getAll().blockingGet()
+            val all: List<UserEntity?> = mUserDao!!.getAll().blockingGet()
             if (all.isNotEmpty()) {
                 val i: Int = mUserDao!!.deleteAll(all).blockingGet()
                 val msg = "delete all success , delete  size $i"

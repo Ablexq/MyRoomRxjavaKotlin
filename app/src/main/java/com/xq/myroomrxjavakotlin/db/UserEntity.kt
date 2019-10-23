@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "user", indices = [])
-class User {
+class UserEntity {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "uid")
     var uid = 0
@@ -54,7 +54,7 @@ class User {
     }
 
     override fun toString(): String {
-        return "User{" +
+        return "UserEntity{" +
                 "uid=" + uid.toString() +
                 ", firstName='" + firstName + '\''.toString() +
                 ", lastName='" + lastName + '\''.toString() +
